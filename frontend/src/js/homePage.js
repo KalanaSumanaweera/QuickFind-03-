@@ -44,3 +44,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Error fetching early providers:", error);
     }
 });
+
+//Change the login and progile based on token
+document.addEventListener('DOMContentLoaded', function() {
+    const authLink = document.getElementById('auth-link');
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user) {
+        // If user is logged in, show profile icon with link to profile including user ID as a query parameter
+        authLink.innerHTML = `
+            <a href="userProfile.html?userId=${user.id}" class="flex items-center space-x-2">
+                <span class="material-icons">account_circle</span>
+                <span>${user.firstName}</span>
+            </a>
+        `;
+    } else {
+        // If user is not logged in, show Login / Sign Up link
+        authLink.innerHTML = `<a href="auth/login.html">Login / Sign Up</a>`;
+    }
+});
+

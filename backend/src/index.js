@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const path = require('path');
 const sequelize = require('./config/database');
 const authRoutes = require('./routes/auth.routes');
 const messageRoutes = require('./routes/message.routes');
@@ -12,11 +13,20 @@ const categoryRoutes = require('./routes/category.routes');
 const offeringRoutes = require('./routes/offering.routes');
 const favouriteRoutes = require('./routes/favourite.routes')
 const homePageRoutes = require("./routes/homePage.routes");
+const userProfileRoutes = require('./routes/userProfile.routes');
+
 
 
 require('./models/associations');
 
 const app = express();
+
+
+app.use('/profileImages', express.static(path.join(__dirname, '/profileImages')));
+app.use('/api/user', userProfileRoutes);
+app.use('/api/update', userProfileRoutes);
+
+
 
 // Middleware
 app.use(bodyParser.json());

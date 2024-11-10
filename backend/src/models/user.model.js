@@ -1,7 +1,6 @@
 // user.model.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
-
+const sequelize = require('../config/database'); // Adjust the path if needed
 
 const User = sequelize.define('User', {
     id: {
@@ -38,9 +37,14 @@ const User = sequelize.define('User', {
     status: {
         type: DataTypes.ENUM('active', 'inactive', 'suspended'),
         defaultValue: 'active'
+    },
+    photoURL: {  // Added field
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     timestamps: true
 });
 
 module.exports = User;
+

@@ -1,18 +1,18 @@
 // frontend/src/js/auth.js
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
 
     if (loginForm) {
-        loginForm.addEventListener('submit', async function(e) {
+        loginForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
             console.log('Login attempt:', { email, password }); // Log login attempt
-            
+
             try {
-                const response = await fetch('http://localhost:3000/api/auth/login', {
+                const responseLogin = await fetch('http://localhost:3000/api/auth/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -20,14 +20,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: JSON.stringify({ email, password })
                 });
 
-                const data = await response.json();
+                const data = await responseLogin.json();
                 console.log('Login response:', data); // Log the response
 
-                if (response.ok) {
+                if (responseLogin.ok) {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     alert('Login successful!');
-                    window.location.href = 'index.html';
+
+                    // Redirect based on role
+                    if (data.user.role === 'customer') {
+                        window.location.href = '../index.html';
+                    } else if (data.user.role === 'service_provider') {
+                        window.location.href = '../provider-dashboard.html'; // Redirect to provider dashboard
+                    } else {
+                        window.location.href = '../login.html';
+                    }
                 } else {
                     alert(data.message || 'Login failed');
                 }
@@ -39,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (signupForm) {
-        signupForm.addEventListener('submit', async function(e) {
+        signupForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             const firstName = document.getElementById('firstName').value;
             const lastName = document.getElementById('lastName').value;
@@ -57,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
-                const response = await fetch('http://localhost:3000/api/auth/register', {
+                const responseSignup = await fetch('http://localhost:3000/api/auth/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -72,12 +80,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                 });
 
-                const data = await response.json();
+                const data = await responseSignup.json();
                 console.log('Registration response:', data); // Log the response
 
-                if (response.ok) {
-                    alert('Registration successful! Please log in.');
-                    window.location.href = 'login.html';
+                if (responseSignup.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    alert('Registration successful!');
+
+                    window.location.href = '../auth/login.html';
+
                 } else {
                     alert(data.message || 'Registration failed');
                 }

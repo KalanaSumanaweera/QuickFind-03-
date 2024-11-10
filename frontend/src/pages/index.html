@@ -29,6 +29,7 @@
       from {
         opacity: 0;
       }
+
       to {
         opacity: 1;
       }
@@ -43,6 +44,7 @@
         transform: translateY(20px);
         opacity: 0;
       }
+
       to {
         transform: translateY(0);
         opacity: 1;
@@ -56,22 +58,29 @@
 </head>
 
 <body class="bg-background font-sans">
-  <header class="bg-primary text-white p-4 animate-fadeIn">
+  <header class="bg-primary text-white p-4">
     <div class="container mx-auto flex justify-between items-center">
-      <img src="../icons/quickfind logo .png" style="height:50px;" alt="logo">
-      <nav>
-        <a href="#" class="hover:text-primary-light transition duration-300 mr-4">How It Works</a>
-        <a href="#" class="hover:text-primary-light transition duration-300 mr-4">For Providers</a>
-        <a href="/signin" class="hover:text-primary-light transition duration-300">Login / Sign Up</a>
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center space-x-2">
+        <img src="../icons/quickfind logo .png" style="height: 50px;" alt="QuickFind logo">
+      </a>
+
+      <!-- Nav Links -->
+      <nav class="flex items-center space-x-6">
+        <a href="#" class="hover:text-primary-light transition duration-300">How It Works</a>
+        <a href="#" class="hover:text-primary-light transition duration-300">For Providers</a>
+        <div id="auth-link" class="hover:text-primary-light transition duration-300"></div>
       </nav>
     </div>
   </header>
+
 
   <main class="container mx-auto mt-8 px-4">
     <!-- Search and banner -->
     <section class="bg-white rounded-lg p-8 mb-12 text-center shadow-lg animate-slideIn">
       <h2 class="text-4xl font-bold text-primary mb-6">Find Trusted Service Providers Near You</h2>
-      <p class="text-text-secondary mb-8">From home repairs to personal services, discover top-rated professionals in your area.</p>
+      <p class="text-text-secondary mb-8">From home repairs to personal services, discover top-rated professionals in
+        your area.</p>
 
       <!-- Search Input and Results Container -->
       <div class="relative max-w-2xl mx-auto">
@@ -96,7 +105,8 @@
     <section id="popular-categories" class="mb-12 animate-slideIn" style="animation-delay: 0.2s;">
       <div class="flex justify-between items-center mb-6">
         <h3 class="text-2xl font-bold text-primary">Popular Categories</h3>
-        <a href="#" id="view-all-categories" class="text-primary hover:text-primary-light transition duration-300">View All Categories</a>
+        <a href="#" id="view-all-categories" class="text-primary hover:text-primary-light transition duration-300">View
+          All Categories</a>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         <!-- Category cards will be dynamically inserted here by JavaScript -->
