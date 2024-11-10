@@ -13,8 +13,14 @@ const categoryRoutes = require('./routes/category.routes');
 const offeringRoutes = require('./routes/offering.routes');
 const favouriteRoutes = require('./routes/favourite.routes')
 const homePageRoutes = require("./routes/homePage.routes");
+<<<<<<< HEAD
 const userProfileRoutes = require('./routes/userProfile.routes');
 
+=======
+const viewprofileRoutes = require('./routes/viewprofile.routes');
+const reviewRoutes = require('./routes/review.routes');
+const userProfileRoutes = require('./routes/userProfile.routes');
+>>>>>>> 7eb773628abb53ae7d065993708171f4b87e0f15
 
 
 require('./models/associations');
@@ -36,6 +42,8 @@ app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
 
+
+
 // Routes
 app.use('/api/auth', authRoutes);
 // app.use('/search', searchRoutes); // Handles search result page navigation
@@ -45,6 +53,10 @@ app.use('/api/offering', offeringRoutes);
 app.use('/api', serviceRoutes); // Route for service-related requests
 app.use('/api/favourite', favouriteRoutes);
 app.use("/api/homepage", homePageRoutes);
+app.use('/api/viewprofile', viewprofileRoutes);
+app.use('/api/review', reviewRoutes);
+app.use('/api/user', userProfileRoutes);
+
 
 
 // Example route

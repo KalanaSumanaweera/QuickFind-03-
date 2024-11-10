@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+<<<<<<< HEAD
 const multer = require('multer');
 const Favourite = require('../models/favourite.model');
 const Service = require('../models/service.model')
@@ -14,12 +15,16 @@ const profileImage = multer({
         }
     })
 });
+=======
+
+>>>>>>> 7eb773628abb53ae7d065993708171f4b87e0f15
 
 // Controller to get user profile by ID
 exports.getUserProfile = async (req, res) => {
     const userId = req.params.id;
 
     try {
+<<<<<<< HEAD
 
         
         const user = await User.findOne({
@@ -34,6 +39,16 @@ exports.getUserProfile = async (req, res) => {
                 }
             ]
         });
+=======
+        // Use findOne with the where clause to find the user by ID
+        const user = await User.findOne({
+            where: {
+                id: userId  // Filter by user ID
+            },
+            attributes: ['id', 'firstName', 'lastName', 'email', 'phone', 'role', 'status','photoURL', 'createdAt', 'updatedAt'] // Define the columns to return
+        });
+        
+>>>>>>> 7eb773628abb53ae7d065993708171f4b87e0f15
 
         if (user) {
             res.json({
@@ -55,6 +70,7 @@ exports.getUserProfile = async (req, res) => {
     }
 };
 
+<<<<<<< HEAD
 // Controller to update user profile photo
 exports.updateUserProfilePhoto = [
     profileImage.single('photo'), // Handle single file upload with field name 'photo'
@@ -140,3 +156,35 @@ exports.updateProfile = async (req, res) => {
 //         res.status(500).json({ message: 'Error fetching recent activities', error: err });
 //     }
 // };
+=======
+// In user.controller.js
+exports.updateUserProfilePhoto = async (req, res) => {
+    const userId = req.params.id;
+    const { photoURL } = req.body;
+
+    try {
+        const user = await User.findByPk(userId);
+        if (user) {
+            console.log("New photo URL:", photoURL); // Debugging line
+            user.photoURL = photoURL;
+            await user.update();
+            res.json({
+                success: true,
+                message: 'Profile photo updated successfully',
+                data: user
+            });
+        } else {
+            res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+    } catch (error) {
+        console.error('Error updating profile photo:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error'
+        });
+    }
+};
+>>>>>>> 7eb773628abb53ae7d065993708171f4b87e0f15

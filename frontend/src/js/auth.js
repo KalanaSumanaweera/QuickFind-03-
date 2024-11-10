@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (responseLogin.ok) {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
+<<<<<<< HEAD
                     alert('Login successful!');
 
                     // Redirect based on role
@@ -36,12 +37,38 @@ document.addEventListener('DOMContentLoaded', function () {
                     } else {
                         window.location.href = '../login.html';
                     }
+=======
+                    // alert(JSON.stringify(data));
+                    Swal.fire({
+                        title: "Login Succesfull",
+                        // text: "That thing is still around?",
+                        icon: "success"
+                      });
+                    if(data.user.role == "customer"){
+window.location.href = '../index.html'
+                    }else if(data.user.role == "service_provider"){
+                        window.location.href = '../provider-dashboard.html'
+
+                    }
+
+
+>>>>>>> 7eb773628abb53ae7d065993708171f4b87e0f15
                 } else {
-                    alert(data.message || 'Login failed');
+                    // alert(data.message || 'Login failed');
+                    Swal.fire({
+                        title: "Login failed!",
+                        text: data.message,
+                        icon: "warning"
+                      });
                 }
             } catch (error) {
                 console.error('Login error:', error);
-                alert('Login failed. Please try again.');
+                // alert('Login failed. Please try again.');
+                Swal.fire({
+                    title: "Login Failed!",
+                    text: "Please try Again Later.",
+                    icon: "warning"
+                  });
             }
         });
     }
@@ -60,7 +87,12 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Signup attempt:', { firstName, lastName, email, phone, password, accountType }); // Log signup attempt
 
             if (password !== confirmPassword) {
-                alert("Passwords don't match!");
+                // alert("Passwords don't match!");
+                Swal.fire({
+                    title: "Passwords don't match!",
+                    text: "Please Recheck your Passwords.",
+                    icon: "warning"
+                  });
                 return;
             }
 
@@ -83,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const data = await responseSignup.json();
                 console.log('Registration response:', data); // Log the response
 
+<<<<<<< HEAD
                 if (responseSignup.ok) {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
@@ -90,12 +123,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     window.location.href = '../auth/login.html';
 
+=======
+                if (response.ok) {
+                    // alert('Registration successful! Please log in.');
+                    Swal.fire({
+                        title: "Registration successful!",
+                        text: "Please log in.",
+                        icon: "success"
+                      });
+                    window.location.href = 'login.html';
+>>>>>>> 7eb773628abb53ae7d065993708171f4b87e0f15
                 } else {
-                    alert(data.message || 'Registration failed');
+                    // alert(data.message || 'Registration failed');
+                    Swal.fire({
+                        title: "Registration failed.",
+                        text: data.message,
+                        icon: "warning"
+                      });
                 }
             } catch (error) {
                 console.error('Registration error:', error);
-                alert('Registration failed. Please try again.');
+                // alert('Registration failed. Please try again.');
+                Swal.fire({
+                    title: "Registration failed. Please try again",
+                    // text: data.message,
+                    icon: "warning"
+                  });
             }
         });
     }

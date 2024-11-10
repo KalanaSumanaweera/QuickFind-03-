@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // routes/userProfile.routes.js
 
 const express = require('express');
@@ -27,5 +28,18 @@ router.put('/update', userController.updateProfile);
 //     }
 // });
 
+=======
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/userProfile.controller');
+const { updateUserProfilePhoto } = require('../controllers/userProfile.controller');
+const multer = require('multer');
+// Route to get user profile by ID
+router.get('/:id', userController.getUserProfile);
+
+const profiles = multer({ dest: 'profileImg/' });
+
+router.patch('/create', profiles.array('profileImg', 1), updateUserProfilePhoto); 
+>>>>>>> 7eb773628abb53ae7d065993708171f4b87e0f15
 
 module.exports = router;
